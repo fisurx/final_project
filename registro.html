@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registrarse - REDA</title>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+	<link href="css/stylelogin.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script>
+			$(document).ready(function(){
+				
+				$("#registrar").click(function(){
+					var dataString = $('#formulario').serialize();
+					$.ajax({
+						type: "POST",
+						url: "php/registrar.php",
+						async: false,
+						data: dataString,
+						success: function(result){
+							var estado  = result.split("&");
+							
+							$("#mensaje").html(estado[0]);
+							if (estado[1] == "OK"){
+							
+							}
+        				}
+					})
+				})
+
+			});
+
+	</script>
+</head>
+
+
+<body>
+	<form id="formulario">
+		<label for="dni">D.N.I: </label>
+		<input type="text" name="dni" required="on">
+		<br>
+		<label for="contrasenia">Contraseña: </label>
+		<input type="password" name="contrasenia" required="on">
+		<br>
+		<label for="primernombre">Primer nombre: </label>
+		<input type="text" name="primernombre" required="on">
+		<br>
+		<label for="otrosnombres">Otros nombres: </label>
+		<input type="text" name="otrosnombres">
+		<br>
+		<label for="primerapellido">Primer apellido: </label>
+		<input type="text" name="primerapellido" required="on">
+		<br>
+		<label for="otrosapellidos">Otros apellidos: </label>
+		<input type="text" name="otrosapellidos">
+		<br>
+		<label for="genero">Género: </label>
+		<input type="radio" name="genero" value="F"> Mujer
+		<input type="radio" name="genero" value="M"> Hombre
+		<input type="radio" name="genero" value="O"> Otro
+		<br>
+		<label for="email">e-mail: </label>
+		<input type="email" name="email" required="on">
+		<br>
+			<label for="idpaisnacimiento">Pais de nacimiento:</label>
+			<select id="idpaisnacimiento" name="idpaisnacimiento">
+			<option value="AR">Argentina</option>
+			<option value="UY">Uruguay</option>
+			<option value="PY">Paraguay</option>
+			<option value="BR">Brasil</option>
+			<option value="BO">Bolivia</option>
+			<option value="CL">Chile</option>
+			<option value="PE">Peru</option>
+			<option value="EC">Ecuador</option>
+			<option value="CO">Colombia</option>
+			<option value="VE">Venezuela</option>
+			<option value="XX">Otros</option>
+		</select>
+		<br>
+		<br>
+		<label for="domiciliocalle">Domicilio: </label>
+		<input type="text" name="domiciliocalle" placeholder="Av. Siempre viva" required="on">
+		<input type="number" name="domicilionumero" placeholder="123" required="on">
+		<br>
+		<label>Código postal: </label>
+		<input type="text" pattern="[0-9]{4}" name="codigopostal" title="Inserte el codigo postal de su domicilio" required="on">
+		<br>
+		<label for="fechanacimiento">Fecha de nacimiento: </label>
+		<input type="date" name="fechanacimiento" required="on">
+		<br>
+		<label>Teléfono celular: </label>
+		<input type=text pattern="[0-9]{10}" name="telefonocelular">
+		<br>
+		<label>Teléfono fijo: </label>
+		<input type=text pattern="[0-9]{8}" name="telefonofijo">
+		<input type="hidden" name="colegio" value="060918100">
+
+		<input type="button" id="registrar" value="Registrarse">
+	</form>
+
+	<div id="mensaje"></div>
+</body>
+</html>

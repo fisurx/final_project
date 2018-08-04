@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Iniciar sesión - REDA</title>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="css/stylelogin.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/jquerysession.js"></script>
+
+<script>
+		$(document).ready(function(){
+			$.ajax({
+					url: "php/getColegios.php",
+					async: false,
+					success: function(result){
+						$("#colegio").html(result);
+					}
+			})
+
+//$.session.remove(clearkey);
+//var answer = $.session.get(checkkey);
+
+
+			$("#enviar").click(function(){
+				$.session.clear();
+				var dataString = $('#formulario').serialize();
+				$.ajax({
+						type: "POST",
+						url: "php/login.php",
+						async: false,
+						data: dataString,
+						success: function(result){
+							var estado  = result.split("&");
+							var dni     = $("#dni").val();
+							var tipo    = $("#tipousuario").val();
+							var cole    = $("#colegio").val();    
+							
+							$("#mensaje").html(estado[0]);
+							if (estado[4] == "OK"){
+								sessionStorage.setItem("dnisesion", dni);
+								sessionStorage.setItem("tiposesion",tipo);
+								sessionStorage.setItem("colesesion",cole);
+								window.open("reda/starter.html","_self");
+							}
+        		}
+				})
+		})
+	});
+
+</script>
+</head>
+<body>
+	<h2>Iniciar sesión</h2>
+	<form id="formulario">
+		<label for="dni">DNI: </label>
+		<input type="text" id="dni" name="dni" required autocomplete="on" title="Inserte su DNI">
+		<br>
+		<label for="contrasenia">Contraseña: </label>
+		<input type="password" name="contrasenia" required>
+		<br>
+		<label for="tipousuario"> Tipo de usuario: </label>
+		<select id="tipousuario" name="tipousuario">
+			<option value="alumnos">Alumno</option>
+			<option value="profesores">Profesor</option>
+			<option value="preceptores">Preceptor</option>
+		</select>
+		<br>
+		<label for="colegio">Institución: </label>
+		<select id="colegio" name="colegio"></select>
+		<br>
+		<input type="button" id="enviar" value="Ingresar">
+	</form>
+	<div id="mensaje"></div>
+</body>
+</html>
