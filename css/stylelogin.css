@@ -1,5 +1,8 @@
 .back-img{
-  background-image: url(images/fondo.png);
+  height: 600px;
+  background-image: url(../images/fondo.png);
+  background-size: cover;
+  background-position: center;
 }
 
 body{
