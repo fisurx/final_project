@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>Iniciar sesión - REDA</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="css/stylelogin.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/jquerysession.js"></script>
-      <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous">
+<head>
+  <title>Iniciar sesión - REDA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="css/stylelogin.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/jquerysession.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-      crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-      crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
 
-    <script>
-      $(document).ready(function () {
+  <script>
+    $(document).ready(function () {
+      $.ajax({
+        url: "php/getColegios.php",
+        async: false,
+        success: function (result) {
+          $("#colegio").html(result);
+        }
+      })
+
+      //$.session.remove(clearkey);
+      //var answer = $.session.get(checkkey);
+
+
+      $("#enviar").click(function () {
+        $.session.clear();
+        var dataString = $('#formulario').serialize();
         $.ajax({
-          url: "php/getColegios.php",
+          type: "POST",
+          url: "php/login.php",
           async: false,
+          data: dataString,
           success: function (result) {
-            $("#colegio").html(result);
-          }
-        })
+            var estado = result.split("&");
+            var dni = $("#dni").val();
+            var tipo = $("#tipousuario").val();
+            var cole = $("#colegio").val();
 
-        //$.session.remove(clearkey);
-        //var answer = $.session.get(checkkey);
-
-
-        $("#enviar").click(function () {
-          $.session.clear();
-          var dataString = $('#formulario').serialize();
-          $.ajax({
-            type: "POST",
-            url: "php/login.php",
-            async: false,
-            data: dataString,
-            success: function (result) {
-              var estado = result.split("&");
-              var dni = $("#dni").val();
-              var tipo = $("#tipousuario").val();
-              var cole = $("#colegio").val();
-
-              $("#mensaje").html(estado[0]);
-              if (estado[4] == "OK") {
-                sessionStorage.setItem("dnisesion", dni);
-                sessionStorage.setItem("tiposesion", tipo);
-                sessionStorage.setItem("colesesion", cole);
-                window.open("reda/starter.html", "_self");
-              }
+            $("#mensaje").html(estado[0]);
+            if (estado[4] == "OK") {
+              sessionStorage.setItem("dnisesion", dni);
+              sessionStorage.setItem("tiposesion", tipo);
+              sessionStorage.setItem("colesesion", cole);
+              window.open("reda/starter.html", "_self");
             }
+          }
 
 
 
 
 
-            
-          })
+
         })
-      });
+      })
+    });
 
-    </script>
-  </head>
+  </script>
+</head>
 
-  <body>
-    <div id="main-container">
-      <!--  <h2>Iniciar sesión</h2>
+<body>
+  <div id="main-container">
+    <!--  <h2>Iniciar sesión</h2>
       <form id="formulario">
         <label for="dni">DNI: </label>
         <input type="text" id="dni" name="dni" required autocomplete="on" title="Inserte su DNI">
@@ -95,58 +95,57 @@
       <div id="mensaje"></div>
       -->
 
-      <!-- BOOTSTRAP -->
-      <div class=class="row" "row" id="fon">
-        <div class="col-md-12">
-          <br>
-          <br>
-          <br>
-        </div>
-      </div>
-      <div class=class="row" "row">
-        <div class="container">
-          <div class="back-img"></div>
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
-
-            <div class="jumbotron fond">
-              <form>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Ingrese su DNI: </label>
-                  <input type="text" class="form-control" name="dni" id="dni" placeholder="DNI">
-                </div>
-                <div class="form-group">
-                  <label for="contrasenia">Ingrese su contraseña: </label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="tipousuario"> Tipo de usuario: </label> 
-                  <select class="form-control dif" id="tipousuario" name="tipousuario">
-                    <option>Alumno</option> 
-                    <option>Profesor</option>
-                    <option>Preceptor</option>
-                  </select>
-                </div>
-                <div class="form-group" class="rectang">
-                  <label for="colegio">Institución: </label>
-                  <select class="form-control dif" id="colegio" name="colegio">
-                    <option>E.E.E.S.T 1</option>
-                    <option>Instituto Don José de San Martin</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-default" id="enviar" value="Ingresar">Ingresar</button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3"></div>
-      </div>
-
+    <!-- BOOTSTRAP -->
+    <div class=class="row" "row" id="fon">
+      <div class="col-md-12">
+        <br>
+        <br>
+        <br>
       </div>
     </div>
-  </body>
+    <div class=class="row" "row">
+      <div class="container">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+          <div class="jumbotron fond">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Ingrese su DNI: </label>
+                <input type="text" class="form-control" name="dni" id="dni" placeholder="DNI">
+              </div>
+              <div class="form-group">
+                <label for="contrasenia">Ingrese su contraseña: </label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <label for="tipousuario"> Tipo de usuario: </label>
+                <select class="form-control dif" id="tipousuario" name="tipousuario">
+                  <option>Alumno</option>
+                  <option>Profesor</option>
+                  <option>Preceptor</option>
+                </select>
+              </div>
+              <div class="form-group" class="rectang">
+                <label for="colegio">Institución: </label>
+                <select class="form-control dif" id="colegio" name="colegio">
+                  <option>E.E.E.S.T 1</option>
+                  <option>Instituto Don José de San Martin</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-default" id="enviar" value="Ingresar">Ingresar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+  </div>
+  </div>
+</body>
 
 </html>
