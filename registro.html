@@ -7,6 +7,18 @@
 	<link href="css/stylelogin.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    	crossorigin="anonymous">
+
+  	<!-- Optional theme -->
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    	crossorigin="anonymous">
+
+  	<!-- Latest compiled and minified JavaScript -->
+ 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	
 	<script>
 			$(document).ready(function(){
 				
@@ -35,69 +47,96 @@
 
 
 <body>
-	<form id="formulario">
-		<label for="dni">D.N.I: </label>
-		<input type="text" name="dni" required="on">
-		<br>
-		<label for="contrasenia">Contraseña: </label>
-		<input type="password" name="contrasenia" required="on">
-		<br>
-		<label for="primernombre">Primer nombre: </label>
-		<input type="text" name="primernombre" required="on">
-		<br>
-		<label for="otrosnombres">Otros nombres: </label>
-		<input type="text" name="otrosnombres">
-		<br>
-		<label for="primerapellido">Primer apellido: </label>
-		<input type="text" name="primerapellido" required="on">
-		<br>
-		<label for="otrosapellidos">Otros apellidos: </label>
-		<input type="text" name="otrosapellidos">
-		<br>
-		<label for="genero">Género: </label>
-		<input type="radio" name="genero" value="F"> Mujer
-		<input type="radio" name="genero" value="M"> Hombre
-		<input type="radio" name="genero" value="O"> Otro
-		<br>
-		<label for="email">e-mail: </label>
-		<input type="email" name="email" required="on">
-		<br>
-			<label for="idpaisnacimiento">Pais de nacimiento:</label>
-			<select id="idpaisnacimiento" name="idpaisnacimiento">
-			<option value="AR">Argentina</option>
-			<option value="UY">Uruguay</option>
-			<option value="PY">Paraguay</option>
-			<option value="BR">Brasil</option>
-			<option value="BO">Bolivia</option>
-			<option value="CL">Chile</option>
-			<option value="PE">Peru</option>
-			<option value="EC">Ecuador</option>
-			<option value="CO">Colombia</option>
-			<option value="VE">Venezuela</option>
-			<option value="XX">Otros</option>
-		</select>
-		<br>
-		<br>
-		<label for="domiciliocalle">Domicilio: </label>
-		<input type="text" name="domiciliocalle" placeholder="Av. Siempre viva" required="on">
-		<input type="number" name="domicilionumero" placeholder="123" required="on">
-		<br>
-		<label>Código postal: </label>
-		<input type="text" pattern="[0-9]{4}" name="codigopostal" title="Inserte el codigo postal de su domicilio" required="on">
-		<br>
-		<label for="fechanacimiento">Fecha de nacimiento: </label>
-		<input type="date" name="fechanacimiento" required="on">
-		<br>
-		<label>Teléfono celular: </label>
-		<input type=text pattern="[0-9]{10}" name="telefonocelular">
-		<br>
-		<label>Teléfono fijo: </label>
-		<input type=text pattern="[0-9]{8}" name="telefonofijo">
-		<input type="hidden" name="colegio" value="060918100">
+	<div class=class="row" "row">
+		<div class="container">
+		  <div class="col-md-3"></div>
+		  <div class="col-md-6">
+  
+			<div class="jumbotron fond">
+			<form id="formulario">
+				<div class="form-group">
+					<label for="dni">D.N.I: </label>
+					<input type="text" name="dni" class="boxes" required="on" placeholder="D.N.I">
+				</div>
+				<div class="form-group">
+					<label for="contrasenia">Contraseña: </label>
+					<input type="password" name="contrasenia" class="boxes" required="on" placeholder="Contraseña">
+				</div>
+				<div class="form-group">
+					<label for="primernombre">Primer nombre: </label>
+					<input type="text" name="primernombre" class="boxes" required="on" placeholder="Primer nombre">
+				</div>
+				<div class="form-group">
+					<label for="otrosnombres">Otros nombres: </label>
+					<input type="text" name="otrosnombres" class="boxes" placeholder="Otros nombres">
+				</div>
+				<div class="form-group">
+					<label for="primerapellido">Primer apellido: </label>
+					<input type="text" name="primerapellido" class="boxes" required="on" placeholder="Primer apellido">
+				</div>
+				<div class="form-group">
+					<label for="otrosapellidos">Otros apellidos: </label>
+					<input type="text" name="otrosapellidos" class="boxes" placeholder="Otros apellidos">
+				</div>
+				<div class="form-group">
+					<label for="genero">Género: </label>
+					<input type="radio" name="genero" value="F"> Mujer
+					<input type="radio" name="genero" value="M"> Hombre
+					<input type="radio" name="genero" value="O"> Otro
+				</div>
+				<div class="form-group">
+					<label for="email">e-mail: </label>
+					<input type="email" name="email" required="on" placeholder="example@gmail.com">
+				</div>
+				<div class="form-group">
+					<label for="idpaisnacimiento">Pais de nacimiento:</label>
+					<select id="idpaisnacimiento" name="idpaisnacimiento">
+						<option value="AR">Argentina</option>
+						<option value="UY">Uruguay</option>
+						<option value="PY">Paraguay</option>
+						<option value="BR">Brasil</option>
+						<option value="BO">Bolivia</option>
+						<option value="CL">Chile</option>
+						<option value="PE">Peru</option>
+						<option value="EC">Ecuador</option>
+						<option value="CO">Colombia</option>
+						<option value="VE">Venezuela</option>
+						<option value="XX">Otros</option>
+					</select>
+				</div>
+				<br>
+				<br>
+				<div class="form-group">
+					<label for="domiciliocalle">Domicilio: </label>
+					<input type="text" name="domiciliocalle" class="boxes" placeholder="Av. Siempre viva" required="on">
+					<input type="number" name="domicilionumero" placeholder="123" required="on">
+				</div>
+				<div class="form-group">
+				<label>Código postal: </label>
+				<input type="text" pattern="[0-9]{4}" class="boxes" name="codigopostal" placeholder="Código postal" title="Inserte el codigo postal de su domicilio" required="on">
+				</div>
+				<div class="form-group">
+				<label for="fechanacimiento">Fecha de nacimiento: </label>
+				<input type="date" name="fechanacimiento" required="on" placeholder="Fecha de nacimiento">
+				</div>
+				<div class="form-group">
+				<label>Teléfono celular: </label>
+				<input type=text pattern="[0-9]{10}" class="boxes" name="telefonocelular" placeholder="Teleéfono celular">
+				</div>
+				<div class="form-group">
+				<label>Teléfono fijo: </label>
+				<input type=text pattern="[0-9]{8}" class="boxes" name="telefonofijo" placeholder="Teléfono fijo">
+				<input type="hidden" name="colegio" value="060918100">
+				</div>
 
-		<input type="button" id="registrar" value="Registrarse">
-	</form>
-
-	<div id="mensaje"></div>
+				<button type="submit" class="btn btn-default" id="registrar" value="Registrarse">Ingresar</button>
+				</form>
+				<div id="mensaje"></div>
+			</div>
+		  </div>
+		</div>
+		<div class="col-md-3"></div>
+	  </div>
+	</div>
 </body>
 </html>
